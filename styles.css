@@ -1,11 +1,63 @@
 body, html {
     margin: 0;
     padding: 0;
-    height: 100%;
+    font-family: 'La Belle Aurore', cursive;
+    background-color: #f8f8f8;
+    color: #333;
+}
+
+.menu {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #f0f0f0; /* Light grey background for elegance */
+    background-color: #fff;
+    padding: 10px 0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    flex-wrap: nowrap; /* Prevent wrapping */
+    overflow-x: auto; /* Allow horizontal scrolling if necessary */
+}
+
+.menu a {
+    text-decoration: none;
+    color: #333;
+    margin: 0 10px; /* Reduce margin */
+    font-size: 36px;
+    transition: color 0.3s;
+}
+
+.menu a:hover {
+    color: #007BFF;
+}
+
+.logo {
+    width: 175px;
+    height: 175px;
+    margin: 0 10px; /* Reduce margin */
+    vertical-align: middle;
+}
+
+.section {
+    padding: 60px 20px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+}
+
+.section h2 {
+    font-size: 76px; /* Three times the original size */
+    margin-bottom: 20px;
+}
+
+.section p {
+    font-size: 18px;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+#about p {
+    font-size: 20px; /* Increase font size for the About section */
 }
 
 .image-container {
@@ -17,4 +69,81 @@ body, html {
     height: auto;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add a subtle shadow for depth */
     border-radius: 8px; /* Rounded corners for a softer look */
+}
+
+.separator {
+    color: #333;
+    margin: 0 5px; /* Reduce margin */
+    font-size: 36px;
+    vertical-align: middle;
+}
+
+.events-table, .history-table {
+    width: 100%;
+    margin: 0 auto;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.events-table th, .events-table td, .history-table th, .history-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+}
+
+.events-table th, .history-table th {
+    background-color: #f2f2f2;
+    font-size: 24px; /* Increase the font size */
+    font-weight: bold; /* Ensure the text is bold */
+}
+
+.events-table tr:nth-child(even), .history-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.events-table tr:hover, .history-table tr:hover {
+    background-color: #f1f1f1;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .menu a {
+        font-size: 18px; /* Further reduce font size */
+    }
+
+    .logo {
+        width: 70px;
+        height: 70px;
+    }
+
+    .section h2 {
+        font-size: 48px; /* Reduce heading size for smaller screens */
+    }
+
+    .separator {
+        font-size: 18px; /* Reduce separator size */
+    }
+}
+
+@media (max-width: 480px) {
+    .menu a {
+        font-size: 14px; /* Further reduce font size */
+    }
+
+    .logo {
+        width: 50px;
+        height: 50px;
+    }
+
+    .section h2 {
+        font-size: 36px; /* Further reduce heading size */
+    }
+
+    .events-table th, .events-table td {
+        padding: 6px; /* Reduce padding for smaller screens */
+    }
+}
+
+.section, .events-table, .history-table {
+    font-family: 'Covered By Your Grace', cursive;
 } 
