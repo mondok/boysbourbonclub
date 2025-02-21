@@ -1,7 +1,7 @@
 body, html {
     margin: 0;
     padding: 0;
-    font-family: 'La Belle Aurore', cursive;
+    font-family: 'La Belle Aurore';
     background-color: #f8f8f8;
     color: #333;
 }
@@ -58,6 +58,7 @@ body, html {
 
 #about p {
     font-size: 20px; /* Increase font size for the About section */
+    margin-bottom: 15px; /* Add margin between paragraphs */
 }
 
 .image-container {
@@ -145,5 +146,5 @@ body, html {
 }
 
 .section, .events-table, .history-table {
-    font-family: 'Covered By Your Grace', cursive;
+    font-family: 'Patrick Hand SC';
 } 

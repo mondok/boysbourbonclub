@@ -6,13 +6,38 @@
     <title>Boys Bourbon Club - BBC - Tampa Bay Area</title>
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=La+Belle+Aurore&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Covered+By+Your+Grace&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Rancho&display=swap" rel="stylesheet">
     <link rel="icon" href="images/logo.png" type="image/png">
     <meta property="og:image" content="images/logo.png">
     <meta property="og:title" content="Boys Bourbon Club - BBC - Tampa Bay Area">
     <meta property="og:description" content="Join the Boys Bourbon Club to explore and celebrate the art of bourbon in the Tampa Bay area.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="http://yourwebsite.com"> <!-- Replace with your actual URL -->
+    <script src="data.js" defer></script>
+    <script defer>
+        document.addEventListener("DOMContentLoaded", function() {
+            const eventsTableBody = document.querySelector(".events-table tbody");
+            eventsData.forEach(event => {
+                const row = `<tr>
+                    <td>${event.date}</td>
+                    <td>${event.location}</td>
+                    <td>${event.responsibilities}</td>
+                </tr>`;
+                eventsTableBody.innerHTML += row;
+            });
+
+            const historyTableBody = document.querySelector(".history-table tbody");
+            historyData.forEach(history => {
+                const row = `<tr>
+                    <td>${history.date}</td>
+                    <td>${history.bourbons.split(',').map(bourbon => `<br>${bourbon}`).join('')}</td>
+                    <td>${history.food.split(',').map(bourbon => `<br>${bourbon}`).join('')}</td>
+                    <td>${history.attendees.split(',').map(bourbon => `<br>${bourbon}`).join('')}</td>
+                </tr>`;
+                historyTableBody.innerHTML += row;
+            });
+        });
+    </script>
 </head>
 <body>
     <nav class="menu">
@@ -36,56 +61,6 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>March 2025</td>
-                    <td>TBD</td>
-                    <td>TBD</td>
-                </tr>
-                <tr>
-                    <td>April 2025</td>
-                    <td>TBD</td>
-                    <td>TBD</td>
-                </tr>
-                <tr>
-                    <td>May 2025</td>
-                    <td>TBD</td>
-                    <td>TBD</td>
-                </tr>
-                <tr>
-                    <td>June 2025</td>
-                    <td>TBD</td>
-                    <td>TBD</td>
-                </tr>
-                <tr>
-                    <td>July 2025</td>
-                    <td>TBD</td>
-                    <td>TBD</td>
-                </tr>
-                <tr>
-                    <td>August 2025</td>
-                    <td>TBD</td>
-                    <td>TBD</td>
-                </tr>
-                <tr>
-                    <td>September 2025</td>
-                    <td>TBD</td>
-                    <td>TBD</td>
-                </tr>
-                <tr>
-                    <td>October 2025</td>
-                    <td>TBD</td>
-                    <td>TBD</td>
-                </tr>
-                <tr>
-                    <td>November 2025</td>
-                    <td>TBD</td>
-                    <td>TBD</td>
-                </tr>
-                <tr>
-                    <td>December 2025</td>
-                    <td>TBD</td>
-                    <td>TBD</td>
-                </tr>
             </tbody>
         </table>
     </section>
@@ -109,12 +84,6 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>February 20, 2025</td>
-                    <td>Elijah Craig, Heaven Hill</td>
-                    <td>Steak Pickles, wings, mashed potatoes, spare ribs</td>
-                    <td>Matt Mondok, Chad Bostak, Sean Christensen, Lance Sturgis, Chris Payne</td>
-                </tr>
             </tbody>
         </table>
     </section>
