@@ -1,5 +1,5 @@
 const eventsData = [
-    { date: "March 2025", location: "TBD", responsibilities: "TBD" },
+    { date: "March 25, 2025", location: "Mondok's", responsibilities: "TBD" },
     { date: "April 2025", location: "TBD", responsibilities: "TBD" },
     { date: "May 2025", location: "TBD", responsibilities: "TBD" },
     { date: "June 2025", location: "TBD", responsibilities: "TBD" },
