@@ -79,34 +79,16 @@ body, html {
     vertical-align: middle;
 }
 
-.events-table, .history-table {
-    width: 100%;
-    margin: 0 auto;
-    border-collapse: collapse;
-    margin-top: 20px;
-    table-layout: auto; /* Allow the table to adjust its layout */
-    overflow-x: auto; /* Enable horizontal scrolling if necessary */
+.instagram-link {
+    color: #E4405F;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s;
 }
 
-.events-table th, .events-table td, .history-table th, .history-table td {
-    border: 1px solid #ddd;
-    padding: 8px;
-    text-align: center;
-    word-wrap: break-word; /* Ensure long words break to fit the cell */
-}
-
-.events-table th, .history-table th {
-    background-color: #f2f2f2;
-    font-size: 24px; /* Increase the font size */
-    font-weight: bold; /* Ensure the text is bold */
-}
-
-.events-table tr:nth-child(even), .history-table tr:nth-child(even) {
-    background-color: #f9f9f9;
-}
-
-.events-table tr:hover, .history-table tr:hover {
-    background-color: #f1f1f1;
+.instagram-link:hover {
+    color: #C13584;
+    text-decoration: underline;
 }
 
 /* Responsive adjustments */

@@ -13,84 +13,36 @@
     <meta property="og:description" content="Join the Boys Bourbon Club to explore and celebrate the art of bourbon in the Tampa Bay area.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="http://yourwebsite.com"> <!-- Replace with your actual URL -->
-    <script src="data.js" defer></script>
-    <script defer>
-        document.addEventListener("DOMContentLoaded", function() {
-            const eventsTableBody = document.querySelector(".events-table tbody");
-            eventsData.forEach(event => {
-                const row = `<tr>
-                    <td>${event.date}</td>
-                    <td>${event.location}</td>
-                    <td>${event.responsibilities}</td>
-                </tr>`;
-                eventsTableBody.innerHTML += row;
-            });
 
-            const historyTableBody = document.querySelector(".history-table tbody");
-            historyData.forEach(history => {
-                const row = `<tr>
-                    <td>${history.date}</td>
-                    <td>${history.bourbons.split(',').map(bourbon => `<br>${bourbon}`).join('')}</td>
-                    <td>${history.food.split(',').map(bourbon => `<br>${bourbon}`).join('')}</td>
-                    <td>${history.attendees.split(',').map(bourbon => `<br>${bourbon}`).join('')}</td>
-                </tr>`;
-                historyTableBody.innerHTML += row;
-            });
-        });
-    </script>
 </head>
 <body>
     <nav class="menu">
-        <a href="#events">Events</a>
-        <span class="separator">|</span>
         <a href="#about">About</a>
         <img src="images/logo.png" alt="Logo" class="logo">
-        <a href="#history">History</a>
-        <span class="separator">|</span>
         <a href="#join">Join</a>
     </nav>
 
-    <section id="events" class="section">
-        <h2>Events</h2>
-        <table class="events-table">
-            <thead>
-                <tr>
-                    <th>Date</th>
-                    <th>Location</th>
-                    <th>Responsibilities</th>
-                </tr>
-            </thead>
-            <tbody>
-            </tbody>
-        </table>
-    </section>
+
 
     <section id="about" class="section">
-        <h2>About</h2>
+        <h2>About Us</h2>
+        <p>BBC - Boys Bourbon Club</p>
+        <p>🫡 Founded 2024 | Tampa Bay📍</p>
+        <p>🥃 Bourbon+Cooking+Brotherhood💪</p>
+        <p>Tastings • Reviews</p>
         <p>The Boys Bourbon Club, founded in 2024, is a community of bourbon enthusiasts located in the Tampa Bay area. Our founding members, Matt Mondok, Chad Bostak, Sean Christensen, Chip Folger, Lance Sturgis, and Chris Payne, came together with a shared passion for celebrating and studying different bourbons.</p>
         <p>Our club's mission is to enjoy one another's company, savor good food, and contribute back to the community. We believe in the art of bourbon as a craft drink and are always eager to expand our circle with new members who share this appreciation.</p>
         <p>Whether you're a seasoned bourbon connoisseur or just beginning your journey, the Boys Bourbon Club offers a welcoming environment to explore the rich history and diverse flavors of bourbon. Join us as we raise a glass to friendship, flavor, and philanthropy.</p>
+        <p>Follow us on Instagram: <a href="https://www.instagram.com/bbc_bourbon/" target="_blank" class="instagram-link">📸 @bbc_bourbon</a></p>
     </section>
 
-    <section id="history" class="section">
-        <h2>History</h2>
-        <table class="history-table">
-            <thead>
-                <tr>
-                    <th>Date</th>
-                    <th>Bourbons</th>
-                    <th>Food</th>
-                    <th>Attendees</th>
-                </tr>
-            </thead>
-            <tbody>
-            </tbody>
-        </table>
-    </section>
+
 
     <section id="join" class="section">
         <h2>Join</h2>
         <p>Email Matt Mondok at <a href="mailto:matt.mondok@gmail.com">matt.mondok@gmail.com</a> for joining information.</p>
     </section>
+
+
 </body>
 </html> 
