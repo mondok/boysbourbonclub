@@ -1,300 +1,619 @@
 <!DOCTYPE html>
-<html style="font-size: 16px;" lang="en"><head>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta charset="utf-8">
     <meta name="keywords" content="bourbon club, bourbon tasting, bourbon enthusiasts, bourbon lovers group, bourbon appreciation, bourbon events, social bourbon club, whiskey tasting group, bourbon community, bourbon and food pairings, bourbon networking, bourbon friends, bourbon education, bourbon tasting notes, craft bourbon, bourbon heritage, study bourbon, bourbon history, Tampa bourbon club, Tampa bourbon tasting, Florida bourbon club, bourbon events Tampa, bourbon society Florida, fine spirits club, whiskey and bourbon lovers, bourbon and food experiences, premium bourbon tasting">
     <meta name="description" content="Join the Tampa Bourbon Club to explore fine bourbons, share tasting notes, and connect with fellow enthusiasts. Founded by friends, our Florida bourbon community gathers for tastings, great food, and meaningful connections.">
     <title>Boys Bourbon Club - BBC - Tampa Bay Area</title>
-    <link rel="stylesheet" href="nicepage.css" media="screen">
-<link rel="stylesheet" href="index.css" media="screen">
-    <script class="u-script" type="text/javascript" src="jquery.js" defer=""></script>
-    <script class="u-script" type="text/javascript" src="nicepage.js" defer=""></script>
     <link rel="icon" href="images/logo.png">
-    <link id="u-page-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css2?display=swap&amp;family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&amp;family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800">
-    <script type="application/ld+json">{
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
+    
+    <!-- Custom Styles -->
+    <style>
+        :root {
+            --bourbon: #D4A574;
+            --dark-leather: #2C1810;
+            --rich-brown: #4A2C1A;
+            --aged-oak: #8B6F47;
+            --cream: #F5E6D3;
+        }
+        
+        body {
+            font-family: 'Lato', sans-serif;
+            background-color: var(--cream);
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .bourbon-gradient {
+            background: linear-gradient(135deg, var(--dark-leather) 0%, var(--rich-brown) 100%);
+        }
+        
+        .leather-texture {
+            background-image: 
+                radial-gradient(circle at 20% 50%, rgba(255, 255, 255, 0.05) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(255, 255, 255, 0.03) 0%, transparent 50%);
+        }
+        
+        .glass-effect {
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(212, 165, 116, 0.3);
+        }
+        
+        .hover-lift {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .hover-lift:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+        
+        .fade-in {
+            animation: fadeIn 1s ease-in;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .nav-link {
+            position: relative;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--bourbon);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .section-divider {
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--bourbon), transparent);
+        }
+        
+        /* Bourbon Glass Scroll Indicator */
+        .bourbon-glass {
+            position: fixed;
+            top: 100px;
+            right: 30px;
+            width: 80px;
+            height: 120px;
+            z-index: 100;
+            pointer-events: none;
+        }
+        
+        .glass-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .glass-outline {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 90px;
+            border: 3px solid var(--bourbon);
+            border-top: none;
+            border-radius: 0 0 8px 8px;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(5px);
+        }
+        
+        .bourbon-liquid {
+            position: absolute;
+            bottom: 3px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 54px;
+            height: 0%;
+            background: linear-gradient(180deg, #D4A574 0%, #8B6F47 100%);
+            border-radius: 0 0 6px 6px;
+            transition: height 0.1s ease-out;
+            box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+        
+        .ice-cube {
+            position: absolute;
+            width: 35px;
+            height: 35px;
+            background: rgba(255, 255, 255, 0.6);
+            border: 2px solid rgba(255, 255, 255, 0.8);
+            border-radius: 4px;
+            box-shadow: inset 0 0 10px rgba(255, 255, 255, 0.7);
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%) rotate(8deg);
+        }
+        
+        @media (max-width: 768px) {
+            .bourbon-glass {
+                display: none;
+            }
+        }
+    </style>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        bourbon: '#D4A574',
+                        'dark-leather': '#2C1810',
+                        'rich-brown': '#4A2C1A',
+                        'aged-oak': '#8B6F47',
+                        cream: '#F5E6D3',
+                    },
+                    fontFamily: {
+                        serif: ['Playfair Display', 'serif'],
+                        sans: ['Lato', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <script type="application/ld+json">
+    {
 		"@context": "http://schema.org",
 		"@type": "Organization",
 		"name": "Boys Bourbon Club",
-		"logo": "images/logo.png?rand=6386",
-		"sameAs": [
-				"https://www.instagram.com/bbc_bourbon/"
-		]
-}</script>
-    <meta name="theme-color" content="#e8b284">
-    <meta name="twitter:site" content="@">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Boys Bourbon Club - BBC">
-    <meta name="twitter:description" content="Join the Tampa Bourbon Club to explore fine bourbons, share tasting notes, and connect with fellow enthusiasts. Founded by friends, our Florida bourbon community gathers for tastings, great food, and meaningful connections.">
-    <meta property="og:title" content="Home">
-    <meta property="og:description" content="Join the Tampa Bourbon Club to explore fine bourbons, share tasting notes, and connect with fellow enthusiasts. Founded by friends, our Florida bourbon community gathers for tastings, great food, and meaningful connections.">
+        "logo": "images/logo.png",
+        "sameAs": ["https://www.instagram.com/bbc_bourbon/"]
+    }
+    </script>
+    
+    <meta name="theme-color" content="#D4A574">
+    <meta property="og:title" content="Boys Bourbon Club - BBC">
+    <meta property="og:description" content="Join the Tampa Bourbon Club to explore fine bourbons, share tasting notes, and connect with fellow enthusiasts.">
     <meta property="og:type" content="website">
     <meta property="og:image" content="images/logo.png">
-  <meta data-intl-tel-input-cdn-path="intlTelInput/"></head>
-  <body data-home-page="Home.html" data-home-page-title="Home" data-path-to-root="./" data-include-products="false" class="u-body u-clearfix u-xl-mode" data-lang="en"><header class="u-clearfix u-header" id="sec-3c14"><div class="u-clearfix u-sheet u-valign-middle-lg u-valign-middle-md u-valign-middle-sm u-valign-middle-xxl u-sheet-1">
-        <a href="#" class="u-image u-logo u-image-1" data-image-width="340" data-image-height="338">
-          <img class="u-logo-image u-logo-image-1" src="images/logo.png?rand=6386">
-        </a>
-        <nav class="u-menu u-menu-one-level u-offcanvas u-menu-1" data-responsive-from="SM" role="navigation">
-          <div class="menu-collapse" style="font-size: 0.875rem; letter-spacing: 0px; text-transform: uppercase; font-weight: 600;">
-            <a class="u-button-style u-custom-active-border-color u-custom-active-color u-custom-border u-custom-border-color u-custom-borders u-custom-color u-custom-hover-border-color u-custom-hover-color u-custom-left-right-menu-spacing u-custom-padding-bottom u-custom-text-active-color u-custom-text-color u-custom-text-decoration u-custom-text-hover-color u-custom-top-bottom-menu-spacing u-hamburger-link u-nav-link u-text-active-palette-1-base u-text-hover-palette-1-base u-hamburger-link-1" href="#" tabindex="-1" aria-label="Open menu" aria-controls="4bd6">
-              <svg class="u-svg-link" viewBox="0 0 24 24"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#menu-hamburger"></use></svg>
-              <svg class="u-svg-content" version="1.1" id="menu-hamburger" viewBox="0 0 16 16" x="0px" y="0px" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg"><g><rect y="1" width="16" height="2"></rect><rect y="7" width="16" height="2"></rect><rect y="13" width="16" height="2"></rect>
-</g></svg>
+</head>
+<body class="antialiased">
+    
+    <!-- Bourbon Glass Scroll Indicator -->
+    <div class="bourbon-glass">
+        <div class="glass-container">
+            <div class="glass-outline">
+                <div class="bourbon-liquid" id="bourbonLiquid"></div>
+                <div class="ice-cube"></div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Navigation -->
+    <nav class="bourbon-gradient leather-texture fixed w-full z-50 shadow-2xl">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- Logo -->
+                <div class="flex-shrink-0">
+                    <a href="#home" class="flex items-center space-x-3">
+                        <img src="images/logo.png" alt="BBC Logo" class="h-14 w-14 rounded-full border-2 border-bourbon">
+                        <span class="text-bourbon text-2xl font-serif font-bold hidden sm:block">BBC</span>
+                    </a>
+                </div>
+                
+                <!-- Desktop Navigation -->
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-center space-x-8">
+                        <a href="#home" class="nav-link text-cream hover:text-bourbon px-3 py-2 text-sm font-medium uppercase tracking-wider">Home</a>
+                        <a href="#about" class="nav-link text-cream hover:text-bourbon px-3 py-2 text-sm font-medium uppercase tracking-wider">About</a>
+                        <a href="#members" class="nav-link text-cream hover:text-bourbon px-3 py-2 text-sm font-medium uppercase tracking-wider">Members</a>
+                        <a href="#upcoming" class="nav-link text-cream hover:text-bourbon px-3 py-2 text-sm font-medium uppercase tracking-wider">Upcoming</a>
+                        <a href="past-events.html" class="nav-link text-cream hover:text-bourbon px-3 py-2 text-sm font-medium uppercase tracking-wider">Past Events</a>
+                        <a href="#join" class="nav-link text-cream hover:text-bourbon px-3 py-2 text-sm font-medium uppercase tracking-wider">Join</a>
+                        <a href="https://www.instagram.com/bbc_bourbon/" target="_blank" class="text-bourbon hover:text-cream transition-colors">
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                            </svg>
             </a>
           </div>
-          <div class="u-custom-menu u-nav-container">
-            <ul class="u-nav u-spacing-20 u-unstyled u-nav-1" role="menubar"><li role="none" class="u-nav-item"><a tabindex="-1" role="menuitem" class="u-border-2 u-border-active-palette-1-base u-border-hover-palette-1-light-1 u-border-no-left u-border-no-right u-border-no-top u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-1-base" href="./#Home" data-page-id="67198314" aria-haspopup="true" aria-expanded="true" style="padding: 6px 0px;">Home</a>
-</li><li role="none" class="u-nav-item"><a tabindex="-1" role="menuitem" class="u-border-2 u-border-active-palette-1-base u-border-hover-palette-1-light-1 u-border-no-left u-border-no-right u-border-no-top u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-1-base" href="./#AboutUs" data-page-id="67198314" style="padding: 6px 0px;">About Us</a>
-</li><li role="none" class="u-nav-item"><a tabindex="-1" role="menuitem" class="u-border-2 u-border-active-palette-1-base u-border-hover-palette-1-light-1 u-border-no-left u-border-no-right u-border-no-top u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-1-base" href="./#Members" data-page-id="67198314" style="padding: 6px 0px;">Members</a>
-</li><li role="none" class="u-nav-item"><a tabindex="-1" role="menuitem" class="u-border-2 u-border-active-palette-1-base u-border-hover-palette-1-light-1 u-border-no-left u-border-no-right u-border-no-top u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-1-base" href="./#UpcomingEvents" data-page-id="67198314" style="padding: 6px 0px;">Upcoming Events</a>
-</li><li role="none" class="u-nav-item"><a tabindex="-1" role="menuitem" class="u-border-2 u-border-active-palette-1-base u-border-hover-palette-1-light-1 u-border-no-left u-border-no-right u-border-no-top u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-1-base" href="past-events.html" style="padding: 6px 0px;">Past Events</a>
-</li><li role="none" class="u-nav-item"><a tabindex="-1" role="menuitem" class="u-border-2 u-border-active-palette-1-base u-border-hover-palette-1-light-1 u-border-no-left u-border-no-right u-border-no-top u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-1-base" href="./#HowtoJoin" data-page-id="67198314" style="padding: 6px 0px;">Join</a>
-</li><li role="none" class="u-nav-item"><a tabindex="-1" role="menuitem" class="u-border-2 u-border-active-palette-1-base u-border-hover-palette-1-light-1 u-border-no-left u-border-no-right u-border-no-top u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-1-base" href="https://www.instagram.com/bbc_bourbon/" style="padding: 6px 0px;">Social</a>
-</li></ul>
           </div>
-          <div class="u-custom-menu u-nav-container-collapse" id="4bd6" role="region" aria-label="Menu panel">
-            <div class="u-black u-container-style u-inner-container-layout u-opacity u-opacity-95 u-sidenav">
-              <div class="u-inner-container-layout u-sidenav-overflow">
-                <div class="u-menu-close" tabindex="-1" aria-label="Close menu"></div>
-                <ul class="u-align-center u-nav u-popupmenu-items u-unstyled u-nav-2" role="menubar"><li role="none" class="u-nav-item"><a tabindex="-1" role="menuitem" class="u-button-style u-nav-link" href="./#Home" data-page-id="67198314" aria-haspopup="true" aria-expanded="true">Home</a>
-</li><li role="none" class="u-nav-item"><a tabindex="-1" role="menuitem" class="u-button-style u-nav-link" href="./#AboutUs" data-page-id="67198314">About Us</a>
-</li><li role="none" class="u-nav-item"><a tabindex="-1" role="menuitem" class="u-button-style u-nav-link" href="./#Members" data-page-id="67198314">Members</a>
-</li><li role="none" class="u-nav-item"><a tabindex="-1" role="menuitem" class="u-button-style u-nav-link" href="./#UpcomingEvents" data-page-id="67198314">Upcoming Events</a>
-</li><li role="none" class="u-nav-item"><a tabindex="-1" role="menuitem" class="u-button-style u-nav-link" href="past-events.html">Past Events</a>
-</li><li role="none" class="u-nav-item"><a tabindex="-1" role="menuitem" class="u-button-style u-nav-link" href="./#HowtoJoin" data-page-id="67198314">Join</a>
-</li><li role="none" class="u-nav-item"><a tabindex="-1" role="menuitem" class="u-button-style u-nav-link" href="https://www.instagram.com/bbc_bourbon/">Social</a>
-</li></ul>
-                <a href="#" class="u-align-center u-btn u-button-style u-hover-palette-1-dark-1 u-palette-1-base u-text-active-white u-btn-1"> Book an appointment</a>
-                <div class="u-social-icons u-social-icons-1">
-                  <a class="u-social-url" title="facebook" target="_blank" href="https://facebook.com/name"><span class="u-icon u-social-facebook u-social-icon u-text-palette-1-base u-icon-1"><svg class="u-svg-link" preserveAspectRatio="xMidYMin slice" viewBox="0 0 112 112" style=""><use xlink:href="#svg-6262"></use></svg><svg class="u-svg-content" viewBox="0 0 112 112" x="0" y="0" id="svg-6262"><path fill="currentColor" d="M75.5,28.8H65.4c-1.5,0-4,0.9-4,4.3v9.4h13.9l-1.5,15.8H61.4v45.1H42.8V58.3h-8.8V42.4h8.8V32.2
-c0-7.4,3.4-18.8,18.8-18.8h13.8v15.4H75.5z"></path></svg></span>
-                  </a>
-                  <a class="u-social-url" title="twitter" target="_blank" href="https://twitter.com/name"><span class="u-icon u-social-icon u-social-twitter u-text-palette-1-base u-icon-2"><svg class="u-svg-link" preserveAspectRatio="xMidYMin slice" viewBox="0 0 112.2 112.2" style=""><use xlink:href="#svg-d3b0"></use></svg><svg class="u-svg-content" viewBox="0 0 112.2 112.2" x="0px" y="0px" id="svg-d3b0"><path d="M67.1,49.1L98.6,16h-12L62,42L43.2,16H11l32.8,45.2L11,96h11.6l26.3-27.7L69.1,96H101L67.1,49.1z M55,61.9l-5.1-7L27.5,24.4
-	h11.4l17.3,23.8l5.1,7.1l23.4,32.2H73.8L55,61.9z"></path></svg></span>
-                  </a>
-                  <a class="u-social-url" title="instagram" target="_blank" href="https://instagram.com/name"><span class="u-icon u-social-icon u-social-instagram u-text-palette-1-base u-icon-3"><svg class="u-svg-link" preserveAspectRatio="xMidYMin slice" viewBox="0 0 112 112" style=""><use xlink:href="#svg-8121"></use></svg><svg class="u-svg-content" viewBox="0 0 112 112" x="0" y="0" id="svg-8121"><path fill="currentColor" d="M55.9,32.9c-12.8,0-23.2,10.4-23.2,23.2s10.4,23.2,23.2,23.2s23.2-10.4,23.2-23.2S68.7,32.9,55.9,32.9z
-	 M55.9,69.4c-7.4,0-13.3-6-13.3-13.3c-0.1-7.4,6-13.3,13.3-13.3s13.3,6,13.3,13.3C69.3,63.5,63.3,69.4,55.9,69.4z"></path><path fill="currentColor" d="M78.2,11H33.5C21,11,10.8,21.3,10.8,33.7v44.7c0,12.6,10.2,22.8,22.7,22.8h44.7c12.6,0,22.7-10.2,22.7-22.7
-	V33.7C100.8,21.1,90.6,11,78.2,11z M91,78.4c0,7.1-5.8,12.8-12.8,12.8H33.5c-7.1,0-12.8-5.8-12.8-12.8V33.7
-	c0-7.1,5.8-12.8,12.8-12.8h44.7c7.1,0,12.8,5.8,12.8,12.8V78.4z"></path></svg></span>
-                  </a>
+                
+                <!-- Mobile menu button -->
+                <div class="md:hidden">
+                    <button id="mobile-menu-button" class="text-cream hover:text-bourbon focus:outline-none">
+                        <svg class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                        </svg>
+                    </button>
                 </div>
               </div>
+        </div>
+        
+        <!-- Mobile menu -->
+        <div id="mobile-menu" class="hidden md:hidden bourbon-gradient border-t border-bourbon/30">
+            <div class="px-2 pt-2 pb-3 space-y-1">
+                <a href="#home" class="block text-cream hover:text-bourbon hover:bg-rich-brown px-3 py-2 rounded-md text-base font-medium">Home</a>
+                <a href="#about" class="block text-cream hover:text-bourbon hover:bg-rich-brown px-3 py-2 rounded-md text-base font-medium">About</a>
+                <a href="#members" class="block text-cream hover:text-bourbon hover:bg-rich-brown px-3 py-2 rounded-md text-base font-medium">Members</a>
+                <a href="#upcoming" class="block text-cream hover:text-bourbon hover:bg-rich-brown px-3 py-2 rounded-md text-base font-medium">Upcoming Events</a>
+                <a href="past-events.html" class="block text-cream hover:text-bourbon hover:bg-rich-brown px-3 py-2 rounded-md text-base font-medium">Past Events</a>
+                <a href="#join" class="block text-cream hover:text-bourbon hover:bg-rich-brown px-3 py-2 rounded-md text-base font-medium">Join</a>
             </div>
-            <div class="u-black u-menu-overlay u-opacity u-opacity-70"></div>
           </div>
         </nav>
-      </div></header>
-    <section class="u-clearfix u-image u-valign-middle-lg u-valign-middle-md u-valign-middle-sm u-valign-middle-xs u-section-1" id="Home" data-image-width="1980" data-image-height="1200">
-      <div class="u-clearfix u-sheet u-sheet-1">
-        <div class="data-layout-selected u-clearfix u-layout-wrap u-layout-wrap-1">
-          <div class="u-layout">
-            <div class="u-layout-row">
-              <div class="u-container-style u-hidden-md u-hidden-sm u-hidden-xs u-image u-layout-cell u-right-cell u-shape-rectangle u-size-33-lg u-size-36-xl u-size-60-md u-size-60-sm u-size-60-xs u-image-1" data-image-width="340" data-image-height="338" data-animation-name="customAnimationIn" data-animation-duration="1500">
-                <div class="u-container-layout u-container-layout-1"></div>
+
+    <!-- Hero Section -->
+    <section id="home" class="relative min-h-screen flex items-center justify-center bourbon-gradient leather-texture pt-20">
+        <div class="absolute inset-0 bg-black/40"></div>
+        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center fade-in">
+            <img src="images/cube_logo.png" alt="BBC Cube Logo" class="mx-auto h-48 w-48 mb-8 drop-shadow-2xl">
+            <h1 class="text-5xl md:text-7xl font-serif font-bold text-bourbon mb-6 drop-shadow-lg">
+                Boys Bourbon Club
+            </h1>
+            <p class="text-xl md:text-2xl text-cream max-w-3xl mx-auto leading-relaxed mb-8 drop-shadow-md">
+                A brotherhood of bourbon lovers dedicated to great spirits, great food, and even greater connections.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="#join" class="bg-bourbon hover:bg-aged-oak text-dark-leather font-bold py-4 px-8 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-xl">
+                    Join the Club
+                </a>
+                <a href="#about" class="glass-effect text-cream font-bold py-4 px-8 rounded-lg hover:bg-white/10 transition-all duration-300 shadow-xl">
+                    Learn More
+                </a>
+            </div>
               </div>
-              <div class="u-align-left u-container-align-left u-container-style u-layout-cell u-left-cell u-shape-rectangle u-size-24-xl u-size-27-lg u-size-60-md u-size-60-sm u-size-60-xs u-layout-cell-2" data-animation-name="customAnimationIn" data-animation-duration="1500" data-animation-delay="500">
-                <div class="u-container-layout u-valign-middle-lg u-valign-middle-md u-valign-middle-sm u-valign-middle-xs u-container-layout-2">
-                  <img class="u-image u-image-contain u-image-default u-preserve-proportions u-image-2" src="images/cube_logo.png" alt="" data-image-width="862" data-image-height="855">
-                  <h2 class="u-align-center u-text u-text-1" data-animation-name="customAnimationIn" data-animation-duration="1500" data-animation-delay="500"> A brotherhood of bourbon lovers dedicated to great spirits, great food, and even greater connections.<br>
-                  </h2>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 bg-cream">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div class="fade-in">
+                    <h2 class="text-4xl md:text-5xl font-serif font-bold text-dark-leather mb-6">About Us</h2>
+                    <div class="section-divider mb-6"></div>
+                    <p class="text-lg text-dark-leather mb-4 leading-relaxed">
+                        Our club was founded by a group of bourbon enthusiasts who share a passion for fine spirits, great food, and meaningful connections.
+                    </p>
+                    <p class="text-lg text-dark-leather mb-4 leading-relaxed">
+                        We gather regularly to explore different bourbons, share tasting notes, and enjoy each other's company.
+                    </p>
+                    <p class="text-lg text-dark-leather mb-4 leading-relaxed">
+                        Our founding members are Matt Mondok, Chad Bostak, Sean Christensen, Chip Folger, Lance Sturgis, and Chris Payne.
+                    </p>
+                    <p class="text-lg text-dark-leather leading-relaxed">
+                        Our goal is to celebrate and study different bourbons, enjoy one another's company, enjoy good food, and contribute back to the community. We're looking to expand with new members that love bourbon as a craft drink.
+                    </p>
                 </div>
-              </div>
+                <div class="fade-in">
+                    <div class="rounded-2xl overflow-hidden shadow-2xl border-4 border-bourbon">
+                        <img src="images/image4Medium.jpeg" alt="Bourbon Club Event" class="w-full h-full object-cover">
             </div>
           </div>
         </div>
       </div>
     </section>
-    <section class="u-clearfix u-image u-valign-middle-lg u-valign-middle-md u-valign-middle-sm u-valign-middle-xs u-section-2" id="AboutUs" data-image-width="1980" data-image-height="1200" data-animation-name="" data-animation-duration="0" data-animation-delay="0" data-animation-direction="">
-      <div class="u-clearfix u-sheet u-valign-middle-lg u-valign-middle-md u-valign-middle-sm u-sheet-1">
-        <div class="data-layout-selected u-clearfix u-expanded-width u-layout-wrap u-layout-wrap-1">
-          <div class="u-layout">
-            <div class="u-layout-row">
-              <div class="u-align-left u-container-align-left u-container-style u-layout-cell u-left-cell u-shape-rectangle u-size-24-lg u-size-24-xl u-size-60-md u-size-60-sm u-size-60-xs u-layout-cell-1" data-animation-name="customAnimationIn" data-animation-duration="1500" data-animation-delay="500">
-                <div class="u-container-layout u-container-layout-1">
-                  <h3 class="u-align-center-md u-align-center-sm u-align-center-xs u-align-left-lg u-align-left-xl u-text u-text-1">About Us<br>
-                  </h3>
-                  <p class="u-align-center-md u-align-center-sm u-align-center-xs u-align-left-lg u-align-left-xl u-text u-text-2"> Our club was founded by a group of bourbon enthusiasts who share a passion for fine spirits, great food, and meaningful connections.&nbsp;<br>
-                    <br>We gather regularly to explore different bourbons, share tasting notes, and enjoy each other's company.<br>
-                    <br>Our founding members are Matt Mondok, Chad Bostak, Sean Christensen, Chip Folger, Lance Sturgis, and Chris Payne.&nbsp;&nbsp;<br>
-                    <br>Our goal is to celebrate and study different bourbons, enjoy one another's company, enjoy good food, and contribute back to the community. We're looking to expand with new members that love bourbon as a craft drink. 
-                  </p>
+
+    <!-- Members Section -->
+    <section id="members" class="py-20 bourbon-gradient leather-texture">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-4xl md:text-5xl font-serif font-bold text-bourbon text-center mb-4">Our Members</h2>
+            <div class="section-divider mb-12 max-w-md mx-auto"></div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- Matt Mondok -->
+                <div class="glass-effect rounded-xl p-8 hover-lift">
+                    <div class="flex items-start justify-between mb-4">
+                        <div>
+                            <h3 class="text-3xl font-serif font-bold text-bourbon mb-1">Matt Mondok</h3>
+                            <p class="text-bourbon/80 font-semibold text-lg">President | Founding Member</p>
+                        </div>
+                        <span class="text-4xl">🧠</span>
+                    </div>
+                    <div class="space-y-3 text-cream leading-relaxed">
+                        <p>Born and raised in West Middlesex, PA, Matt is the visionary who introduced the idea of formalizing our shenanigans. He's the smart guy of the group who is great with computers and basically makes sure we don't completely break the rules!</p>
+                        <p>Software Architect with degrees from Indiana University and Temple University. Proud girl dad of two beautiful young ladies: Madeline (FSU) and Lucy (committed to FAU softball).</p>
+                        <p class="text-bourbon italic">Fun fact: Can't resist hot food even if it makes him sweat. When not sipping bourbon, you'll find him by the fire pit with a cold beer.</p>
+                        <p class="text-sm text-bourbon font-semibold mt-4">Favorite Bourbon: Old Forester Birthday</p>
+                    </div>
+                </div>
+                
+                <!-- Sean Christensen -->
+                <div class="glass-effect rounded-xl p-8 hover-lift">
+                    <div class="flex items-start justify-between mb-4">
+                        <div>
+                            <h3 class="text-3xl font-serif font-bold text-bourbon mb-1">Sean Christensen</h3>
+                            <p class="text-bourbon/80 font-semibold text-lg">Vice President | Founding Member</p>
+                        </div>
+                        <span class="text-4xl">🦅</span>
+                    </div>
+                    <div class="space-y-3 text-cream leading-relaxed">
+                        <p>The last of our founding members and the guy who somehow knows everyone. Sean is our social butterfly and the type of person that can talk to anybody. He's always working to bring people together and make sure the BBC keeps rolling strong.</p>
+                        <p>Big-time sports fan with a special love for his Auburn football (War Damn Eagle!). All about family and always on the road for one of their events.</p>
+                        <p>His beautiful wife, Deanna, keeps him grounded, and together they've raised two awesome kids: Kayla (sophomore at Georgia Southern, crushing it on the softball field) and Brodie (junior at East Lake High School, playing football under those Friday night lights).</p>
+                        <p class="text-sm text-bourbon font-semibold mt-4">Favorite Bourbon: Blanton's</p>
                 </div>
               </div>
-              <div class="u-container-align-center-lg u-container-align-center-sm u-container-align-center-xl u-container-align-center-xs u-container-style u-layout-cell u-right-cell u-shape-rectangle u-size-36-lg u-size-36-xl u-size-60-md u-size-60-sm u-size-60-xs u-layout-cell-2" data-animation-name="customAnimationIn" data-animation-duration="1500" data-animation-delay="250">
-                <div class="u-container-layout u-valign-middle u-container-layout-2">
-                  <div class="u-align-center-md u-align-center-sm u-align-center-xs u-carousel u-gallery u-gallery-slider u-layout-carousel u-lightbox u-no-transition u-show-text-on-hover u-gallery-1" id="carousel-e290" data-interval="5000" data-u-ride="carousel">
-                    <ol class="u-absolute-hcenter u-carousel-indicators u-carousel-indicators-1">
-                      <li data-u-target="#carousel-e290" data-u-slide-to="0" class="u-active u-grey-70 u-shape-rectangle" style="width: 30px; height: 3px;"></li>
-                    </ol>
-                    <div class="u-carousel-inner u-gallery-inner u-gallery-inner-1" role="listbox">
-                      <div class="u-active u-carousel-item u-effect-fade u-gallery-item u-carousel-item-1" data-image-width="700" data-image-height="700">
-                        <div class="u-back-slide" data-image-width="640" data-image-height="480">
-                          <img class="u-back-image u-expanded" src="images/image4Medium.jpeg" alt="​Cheese Bread">
+                
+                <!-- Lance Sturgis -->
+                <div class="glass-effect rounded-xl p-8 hover-lift">
+                    <div class="flex items-start justify-between mb-4">
+                        <div>
+                            <h3 class="text-3xl font-serif font-bold text-bourbon mb-1">Lance Sturgis</h3>
+                            <p class="text-bourbon/80 font-semibold text-lg">Chef de Cuisine | Founding Member</p>
                         </div>
-                        <div class="u-align-center u-over-slide u-shading u-valign-bottom u-over-slide-1">
-                        </div>
-                      </div>
+                        <span class="text-4xl">🔥</span>
                     </div>
-                    <a class="u-absolute-vcenter u-carousel-control u-carousel-control-prev u-icon-circle u-opacity u-opacity-70 u-palette-1-base u-spacing-10 u-carousel-control-1" href="#carousel-e290" role="button" data-u-slide="prev"><span aria-hidden="true">
-                        <svg viewBox="0 0 8 8"><path d="M5.25 0l-4 4 4 4 1.5-1.5-2.5-2.5 2.5-2.5-1.5-1.5z"></path></svg></span><span class="sr-only">
-                        <svg viewBox="0 0 8 8"><path d="M5.25 0l-4 4 4 4 1.5-1.5-2.5-2.5 2.5-2.5-1.5-1.5z"></path></svg></span>
-                    </a>
-                    <a class="u-absolute-vcenter u-carousel-control u-carousel-control-next u-icon-circle u-opacity u-opacity-70 u-palette-1-base u-spacing-10 u-text-white u-carousel-control-2" href="#carousel-e290" role="button" data-u-slide="next"><span aria-hidden="true">
-                        <svg viewBox="0 0 8 8"><path d="M2.75 0l-1.5 1.5 2.5 2.5-2.5 2.5 1.5 1.5 4-4-4-4z"></path></svg></span><span class="sr-only">
-                        <svg viewBox="0 0 8 8"><path d="M2.75 0l-1.5 1.5 2.5 2.5-2.5 2.5 1.5 1.5 4-4-4-4z"></path></svg></span>
-                    </a>
+                    <div class="space-y-3 text-cream leading-relaxed">
+                        <p>The guy who throws down in the kitchen and on the smoker! Born in New York but raised in the Greater Tampa Bay Area. His food is next-level, and he's always serving up something wild when we have our gatherings, no matter who's house it's at!</p>
+                        <p>Just to name a couple of crazy unique dishes: beef tongue tacos, oxtails, octopus, ribs. If Lance is cooking, you're in for a feast and those ribs are on another level.</p>
+                        <p>Married to his amazing wife Valarie, a nurse educator for a cancer hospital and cancer survivor herself. Proud dad of two incredible daughters: Ashling (just graduated from USF with a degree in Business Administration) and Makenna (freshman at FSU on a softball scholarship).</p>
+                        <p class="text-sm text-bourbon font-semibold mt-4">Favorite Bourbon: Buffalo Trace</p>
+                    </div>
+                </div>
+                
+                <!-- Chris Payne -->
+                <div class="glass-effect rounded-xl p-8 hover-lift">
+                    <div class="flex items-start justify-between mb-4">
+                        <div>
+                            <h3 class="text-3xl font-serif font-bold text-bourbon mb-1">Chris Payne</h3>
+                            <p class="text-bourbon/80 font-semibold text-lg">Member at Large | Founding Member</p>
+                        </div>
+                        <span class="text-4xl">🏆</span>
+                    </div>
+                    <div class="space-y-3 text-cream leading-relaxed">
+                        <p>Born and raised in Franklin, TN area, Chris is a diehard Tennessee sports fan (Titans, Predators, Braves and of course... Go Vols!). Even though he resides in FL now, Chris won't drink Gatorade if that tells you anything.</p>
+                        <p>Our "stump the Schwab" type of guy! He can rattle off exact dates of sporting events like it's nothing. Want to know who hit the game winning homer in 2001 in the Allstars game or what day the Titans beat the Jags in the playoffs? Ask Chris. He'll know. Every. Single. Detail.</p>
+                        <p>Chris and his wife Sarah are expecting their first baby boy this December. Sarah is without question the brains of the operation because if it's not sports-related, she's the one helping Chris survive. She is no slouch with sports either and even though she is a Mets fan, her and Chris have common ground pulling for the Tampa Bay Rays!</p>
+                        <p class="text-bourbon italic text-sm mt-4">Club rep: The guy you don't challenge to sports trivia... unless you want to be in your phone looking up dates from 1998, 1995 & 2001.</p>
                   </div>
                 </div>
+                
+                <!-- Chip Folger -->
+                <div class="glass-effect rounded-xl p-8 hover-lift">
+                    <div class="flex items-start justify-between mb-4">
+                        <div>
+                            <h3 class="text-3xl font-serif font-bold text-bourbon mb-1">Chip Folger</h3>
+                            <p class="text-bourbon/80 font-semibold text-lg">Member at Large | Founding Member</p>
+                        </div>
+                        <span class="text-4xl">🎉</span>
               </div>
+                    <div class="space-y-3 text-cream leading-relaxed">
+                        <p>One of the original members of the BBC crew and another founder. Chip is our big guy with an even bigger heart. Born in Sterling, Massachusetts, moved to the Tampa Bay area at a young age and has been fortunate enough to raise a beautiful family here!</p>
+                        <p>Chip and his wonderful wife Sarah have two amazing kids: Anna (freshman at the University of Florida - Chomp, Chomp! - a force on the softball field) and Rex (junior at East Lake High School playing baseball, his strength and size is getting better than pops at this point).</p>
+                        <p>Former three-sport athlete himself (football, baseball, basketball) and now a pretty solid golfer, Chip is a true family man. When he's not on a ball field cheering his kids on, you'll find him volunteering his time keeping the fields pristine at both East Lake High School and East Lake Little League.</p>
+                        <p class="text-bourbon italic text-sm">Fair warning... when the night winds down, he's also the guy who might just curl up on your couch and call it a night.</p>
+                        <p class="text-sm text-bourbon font-semibold mt-4">Favorite Bourbon: Knob Creek</p>
             </div>
           </div>
+                
+                <!-- Chad Bostak -->
+                <div class="glass-effect rounded-xl p-8 hover-lift">
+                    <div class="flex items-start justify-between mb-4">
+                        <div>
+                            <h3 class="text-3xl font-serif font-bold text-bourbon mb-1">Chad Bostak</h3>
+                            <p class="text-bourbon/80 font-semibold text-lg">Member at Large | Founding Member</p>
         </div>
+                        <span class="text-4xl">😂</span>
       </div>
+                    <div class="space-y-3 text-cream leading-relaxed">
+                        <p>Say hello to Chad, one of our founding members and the guy who keeps us all laughing one way or another. Born in Winter Park, FL, Chad has a full house and a full heart. He and his amazing wife, Joanna, just welcomed their babygirl, Zara Frances, on July 26, 2025.</p>
+                        <p>Chad is a proud dad of four: Maddie (sophomore at Eckerd College playing softball on scholarship), Meagan (HS senior at East Lake, just committed to attend West Alabama to play softball), Josh (14-year-old son who's already a full-on gym rat), and baby Zara, the newest member of the squad.</p>
+                        <p>Chad's not just a busy dad and a great father, he is an outdoorsman, man of faith and a reliable friend. He loves hiking, exploring nature, and leading his family by example. He's known in the club for being one of the goofy ones, always cracking jokes and keeping spirits high.</p>
+                        <p class="text-bourbon italic text-sm mt-4">Club rep: The outdoorsy, faith-driven family man who always keeps us laughing (even if that means we're laughing at him, which is the case most of the time).</p>
+                        <p class="text-sm text-bourbon font-semibold mt-4">Favorite Bourbon: Blade & Bow</p>
+              </div>
+            </div>
+                
+                <!-- John Iannaccone -->
+                <div class="glass-effect rounded-xl p-8 hover-lift">
+                    <div class="flex items-start justify-between mb-4">
+                        <div>
+                            <h3 class="text-3xl font-serif font-bold text-bourbon mb-1">John Iannaccone</h3>
+                            <p class="text-bourbon/80 font-semibold text-lg">Member at Large | "Small Batch" Member</p>
+              </div>
+                        <span class="text-4xl">🇮🇹</span>
+            </div>
+                    <div class="space-y-3 text-cream leading-relaxed">
+                        <p>Born and raised in New Port Richey, FL and a proud Mitchell High School grad, John is the newest face in the BBC Club. Unlike the founding members, John joins us in what we're calling our "Small Batch" release... limited, exclusive, and built to add some extra flavor to the mix.</p>
+                        <p>John and his beautiful wife, Lyndsie, just welcomed their first baby boy, Luca Michael Iannaccone, on 6/16/2025. Talk about a special year.</p>
+                        <p class="font-semibold text-bourbon">Couple reasons why we added John into BBC:</p>
+                        <p>🍝 He's Italian and knows how to throw down in the kitchen<br>
+                        🥃 He's a huge bourbon fan who fits right into the brotherhood<br>
+                        🤣 He brings some energy, laughs, and a lot of "Stallion swagger"</p>
+                        <p class="text-bourbon italic text-sm mt-4">Club rep: 🐎 The Italian Stallion — part bourbon guy, part chef, and now officially part of the BBC brotherhood.</p>
+              </div>
+              </div>
+            </div>
+              </div>
     </section>
-    <section class="u-clearfix u-container-align-center u-image u-shading u-section-3" id="Members" data-image-width="1080" data-image-height="607">
-      <div class="u-clearfix u-sheet u-valign-middle-lg u-valign-middle-md u-valign-middle-sm u-valign-middle-xs u-sheet-1">
-        <h2 class="u-align-center u-text u-text-body-alt-color u-text-1" data-animation-name="customAnimationIn" data-animation-duration="1500" data-animation-delay="500">Members</h2>
-        <div class="u-expanded-width u-list u-list-1">
-          <div class="u-repeater u-repeater-1">
-            <div class="u-black u-container-style u-list-item u-opacity u-opacity-50 u-radius-20 u-repeater-item u-shape-round u-list-item-1" data-animation-name="customAnimationIn" data-animation-duration="1500">
-              <div class="u-container-layout u-similar-container u-container-layout-1">
-                <h4 class="u-text u-text-palette-1-base u-text-2">Matt Mondok</h4>
-                <p class="u-text u-text-3">President<br>Favorite Bourbon:&nbsp; Old Forester Birthday
-                </p>
-              </div>
+
+    <!-- Upcoming Events Section -->
+    <section id="upcoming" class="py-20 bg-cream">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-4xl md:text-5xl font-serif font-bold text-dark-leather text-center mb-4">Upcoming Events 2026</h2>
+            <div class="section-divider mb-12 max-w-md mx-auto"></div>
+            
+            <div class="bourbon-gradient leather-texture rounded-2xl p-8 md:p-12 shadow-2xl border-2 border-bourbon">
+                <div class="space-y-6">
+                    <!-- Event Item -->
+                    <div class="glass-effect rounded-xl p-6 border-l-4 border-bourbon hover-lift">
+                        <h3 class="text-2xl font-serif font-bold text-bourbon mb-2">Saturday, January 24</h3>
+                        <h4 class="text-xl font-semibold text-cream mb-2">Winter Bourbon Tasting</h4>
+                        <p class="text-cream">Join us for our first event of 2026</p>
             </div>
-            <div class="u-black u-container-style u-list-item u-opacity u-opacity-50 u-radius-20 u-repeater-item u-shape-round u-video-cover u-list-item-2" data-animation-name="customAnimationIn" data-animation-duration="1500">
-              <div class="u-container-layout u-similar-container u-container-layout-2">
-                <h4 class="u-text u-text-palette-1-base u-text-4">sean christensen</h4>
-                <p class="u-text u-text-5">Vice President<br>Favorite Bourbon: Blanton's
-                </p>
+                    
+                    <div class="glass-effect rounded-xl p-6 border-l-4 border-bourbon hover-lift">
+                        <h3 class="text-2xl font-serif font-bold text-bourbon mb-2">Saturday, April 18</h3>
+                        <h4 class="text-xl font-semibold text-cream mb-2">Spring Bourbon Gathering</h4>
+                        <p class="text-cream">Celebrating the season with fine spirits</p>
               </div>
+                    
+                    <div class="glass-effect rounded-xl p-6 border-l-4 border-bourbon hover-lift">
+                        <h3 class="text-2xl font-serif font-bold text-bourbon mb-2">Saturday, July 11</h3>
+                        <h4 class="text-xl font-semibold text-cream mb-2">Summer Bourbon Social</h4>
+                        <p class="text-cream">Mid-year celebration with great bourbon</p>
             </div>
-            <div class="u-black u-container-style u-list-item u-opacity u-opacity-50 u-radius-20 u-repeater-item u-shape-round u-video-cover u-list-item-3" data-animation-name="customAnimationIn" data-animation-duration="1500">
-              <div class="u-container-layout u-similar-container u-container-layout-3">
-                <h4 class="u-text u-text-palette-1-base u-text-6">lance sturgis</h4>
-                <p class="u-text u-text-7">Chef de Cuisine<br>Favorite Bourbon:&nbsp; Buffalo Trace
-                </p>
-              </div>
-            </div>
-            <div class="u-black u-container-style u-list-item u-opacity u-opacity-50 u-radius-20 u-repeater-item u-shape-round u-video-cover u-list-item-4" data-animation-name="customAnimationIn" data-animation-duration="1500">
-              <div class="u-container-layout u-similar-container u-container-layout-4">
-                <h4 class="u-text u-text-palette-1-base u-text-8">chris payne</h4>
-                <p class="u-text u-text-9">Member at Large</p>
-              </div>
-            </div>
-            <div class="u-black u-container-style u-list-item u-opacity u-opacity-50 u-radius-20 u-repeater-item u-shape-round u-video-cover u-list-item-5" data-animation-name="customAnimationIn" data-animation-duration="1500">
-              <div class="u-container-layout u-similar-container u-container-layout-5">
-                <h4 class="u-text u-text-palette-1-base u-text-10">chip folger</h4>
-                <p class="u-text u-text-11">Member at Large<br>Favorite Bourbon:&nbsp; Knob Creek
-                </p>
-              </div>
-            </div>
-            <div class="u-black u-container-style u-list-item u-opacity u-opacity-50 u-radius-20 u-repeater-item u-shape-round u-video-cover u-list-item-6" data-animation-name="customAnimationIn" data-animation-duration="1500">
-              <div class="u-container-layout u-similar-container u-container-layout-6">
-                <h4 class="u-text u-text-palette-1-base u-text-12">chad bostak</h4>
-                <p class="u-text u-text-13">Member at Large<br>Favorite Bourbon: Blade &amp; Bow
-                </p>
-              </div>
-            </div>
-            <div class="u-black u-container-style u-list-item u-opacity u-opacity-50 u-radius-20 u-repeater-item u-shape-round u-video-cover u-list-item-7" data-animation-name="customAnimationIn" data-animation-duration="1500">
-              <div class="u-container-layout u-similar-container u-container-layout-7">
-                <h4 class="u-text u-text-palette-1-base u-text-14"> John Iannaccone</h4>
-                <p class="u-text u-text-15">Member at Large<br>
-                </p>
-              </div>
+                    
+                    <div class="glass-effect rounded-xl p-6 border-l-4 border-bourbon hover-lift">
+                        <h3 class="text-2xl font-serif font-bold text-bourbon mb-2">Kentucky Trip</h3>
+                        <h4 class="text-xl font-semibold text-cream mb-2">Thursday, October 2-5</h4>
+                        <p class="text-cream">Annual bourbon country adventure</p>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <section class="u-align-center u-clearfix u-container-align-center u-white u-section-4" id="UpcomingEvents">
-      <div class="u-clearfix u-sheet u-valign-middle-lg u-valign-middle-md u-valign-middle-sm u-valign-middle-xs u-sheet-1">
-        <h2 class="u-align-center u-text u-text-default u-text-1" style="margin-top: 60px; margin-bottom: 40px;">Upcoming Events 2026</h2>
-        <div style="max-width: 800px; margin: 0 auto; padding: 0 20px;">
-          <div style="background: linear-gradient(135deg, #2c1810 0%, #4a2c1a 100%); border-radius: 20px; padding: 40px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); border: 2px solid #e8b284;">
+    <!-- Join Section -->
+    <section id="join" class="py-20 bourbon-gradient leather-texture">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-4xl md:text-5xl font-serif font-bold text-bourbon text-center mb-4">How to Join</h2>
+            <div class="section-divider mb-8 max-w-md mx-auto"></div>
+            <p class="text-xl text-cream text-center italic mb-12 max-w-3xl mx-auto">
+                "Too much of anything is bad, but too much good whiskey is barely enough."<br>
+                <span class="text-bourbon">— Mark Twain</span>
+            </p>
             
-            <div style="margin-bottom: 30px; padding: 25px; background: rgba(232, 178, 132, 0.1); border-radius: 15px; border-left: 5px solid #e8b284;">
-              <h3 style="color: #e8b284; font-size: 1.4rem; font-weight: 700; margin: 0 0 10px 0;">Saturday, January 24</h3>
-              <h4 style="color: #fff; font-size: 1.1rem; font-weight: 600; margin: 0 0 8px 0;">Winter Bourbon Tasting</h4>
-              <p style="color: #ddd; font-size: 1rem; margin: 0; line-height: 1.5;">Join us for our first event of 2026</p>
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Step 1 -->
+                <div class="glass-effect rounded-xl p-8 text-center hover-lift">
+                    <div class="bg-bourbon w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg">
+                        <svg class="w-8 h-8 text-dark-leather" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl font-serif font-bold text-bourbon mb-4">Reach Out</h3>
+                    <p class="text-cream">Let us know you're interested. You can DM us on Instagram!</p>
+              </div>
+                
+                <!-- Step 2 -->
+                <div class="glass-effect rounded-xl p-8 text-center hover-lift">
+                    <div class="bg-bourbon w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg">
+                        <svg class="w-8 h-8 text-dark-leather" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
+                        </svg>
             </div>
-            
-            <div style="margin-bottom: 30px; padding: 25px; background: rgba(232, 178, 132, 0.1); border-radius: 15px; border-left: 5px solid #e8b284;">
-              <h3 style="color: #e8b284; font-size: 1.4rem; font-weight: 700; margin: 0 0 10px 0;">Saturday, April 18</h3>
-              <h4 style="color: #fff; font-size: 1.1rem; font-weight: 600; margin: 0 0 8px 0;">Spring Bourbon Gathering</h4>
-              <p style="color: #ddd; font-size: 1rem; margin: 0; line-height: 1.5;">Celebrating the season with fine spirits</p>
+                    <h3 class="text-2xl font-serif font-bold text-bourbon mb-4">Attend</h3>
+                    <p class="text-cream">Come to three events. Be yourself and contribute with great homemade food, great bourbon, or great company!</p>
+              </div>
+                
+                <!-- Step 3 -->
+                <div class="glass-effect rounded-xl p-8 text-center hover-lift">
+                    <div class="bg-bourbon w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg">
+                        <svg class="w-8 h-8 text-dark-leather" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
             </div>
-            
-            <div style="margin-bottom: 30px; padding: 25px; background: rgba(232, 178, 132, 0.1); border-radius: 15px; border-left: 5px solid #e8b284;">
-              <h3 style="color: #e8b284; font-size: 1.4rem; font-weight: 700; margin: 0 0 10px 0;">Saturday, July 11</h3>
-              <h4 style="color: #fff; font-size: 1.1rem; font-weight: 600; margin: 0 0 8px 0;">Summer Bourbon Social</h4>
-              <p style="color: #ddd; font-size: 1rem; margin: 0; line-height: 1.5;">Mid-year celebration with great bourbon</p>
-            </div>
-            
-            <div style="padding: 25px; background: rgba(232, 178, 132, 0.15); border-radius: 15px; border-left: 5px solid #e8b284;">
-              <h3 style="color: #e8b284; font-size: 1.4rem; font-weight: 700; margin: 0 0 10px 0;">Kentucky Trip</h3>
-              <h4 style="color: #fff; font-size: 1.1rem; font-weight: 600; margin: 0 0 8px 0;">Thursday, October 2-5</h4>
-              <p style="color: #ddd; font-size: 1rem; margin: 0; line-height: 1.5;">Annual bourbon country adventure</p>
-            </div>
-            
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="u-align-center u-clearfix u-container-align-center u-white u-section-5" src="" id="HowtoJoin">
-      <div class="u-clearfix u-sheet u-valign-middle-lg u-valign-middle-md u-valign-middle-sm u-valign-middle-xs u-sheet-1">
-        <h2 class="u-align-center u-text u-text-default u-text-1">How to Join </h2>
-        <p class="u-align-center u-text u-text-2">"​​Too much of anything is bad, but too much good whiskey is barely enough."<br>- Mark Twain
-        </p>
-        <div class="u-expanded-width u-list u-list-1">
-          <div class="u-repeater u-repeater-1">
-            <div class="u-border-2 u-border-palette-1-base u-container-style u-image u-list-item u-radius u-repeater-item u-shading u-shape-round u-image-1" data-animation-name="customAnimationIn" data-animation-duration="1500" data-animation-delay="500" data-image-width="1280" data-image-height="853">
-              <div class="u-container-layout u-similar-container u-container-layout-1"><span class="u-align-center u-file-icon u-gradient u-icon u-icon-rounded u-radius u-text-white u-icon-1" data-animation-name="" data-animation-duration="0" data-animation-delay="0" data-animation-direction=""><img src="images/1698477-6727abc6.png" alt=""></span>
-                <h4 class="u-align-center u-text u-text-3">Reach Out</h4>
-                <p class="u-align-center u-text u-text-4">Let us know you're interested.&nbsp; You can DM us on Instagram!</p>
+                    <h3 class="text-2xl font-serif font-bold text-bourbon mb-4">Join</h3>
+                    <p class="text-cream">We "curate" the group. Odds are, if you're not a good fit, we'll both know. But still, we like to make sure we all get along.</p>
               </div>
             </div>
-            <div class="u-border-2 u-border-palette-1-base u-container-align-center u-container-style u-image u-list-item u-radius u-repeater-item u-shading u-shape-round u-image-2" data-animation-name="customAnimationIn" data-animation-duration="1500" data-animation-delay="500" data-image-width="1280" data-image-height="853">
-              <div class="u-container-layout u-similar-container u-container-layout-2"><span class="u-align-center u-file-icon u-gradient u-icon u-icon-rounded u-radius u-text-white u-icon-2" data-animation-name="" data-animation-duration="0" data-animation-delay="0" data-animation-direction=""><img src="images/1286827-c925e084.png" alt=""></span>
-                <h4 class="u-align-center u-text u-text-5"> Attend</h4>
-                <p class="u-align-center u-text u-text-6">Come to three events.&nbsp; Be yourself and contribute either with great homemad food, great bourbon, or great company!</p>
-              </div>
-            </div>
-            <div class="u-border-2 u-border-palette-1-base u-container-style u-image u-list-item u-radius u-repeater-item u-shading u-shape-round u-image-3" data-animation-name="customAnimationIn" data-animation-duration="1500" data-animation-delay="500" data-image-width="1280" data-image-height="854">
-              <div class="u-container-layout u-similar-container u-container-layout-3"><span class="u-align-center u-file-icon u-gradient u-icon u-icon-rounded u-radius u-text-white u-icon-3" data-animation-name="" data-animation-duration="0" data-animation-delay="0" data-animation-direction=""><img src="images/8582929-8313c3fb.png" alt=""></span>
-                <h4 class="u-align-center u-text u-text-7">Join</h4>
-                <p class="u-align-center u-text u-text-8">We "curate" the group.&nbsp; Odds are, if you're not a good fit, we'll both know.&nbsp; But still, we like to make sure we all get along.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="u-social-icons u-social-icons-1">
-          <a class="u-social-url" title="https://www.instagram.com/bbc_bourbon/" target="_blank" href="https://instagram.com/name"><span class="u-icon u-social-icon u-social-instagram u-icon-4"><svg class="u-svg-link" preserveAspectRatio="xMidYMin slice" viewBox="0 0 112 112" style=""><use xlink:href="#svg-61fd"></use></svg><svg class="u-svg-content" viewBox="0 0 112 112" x="0" y="0" id="svg-61fd"><circle fill="currentColor" cx="56.1" cy="56.1" r="55"></circle><path fill="#FFFFFF" d="M55.9,38.2c-9.9,0-17.9,8-17.9,17.9C38,66,46,74,55.9,74c9.9,0,17.9-8,17.9-17.9C73.8,46.2,65.8,38.2,55.9,38.2
-z M55.9,66.4c-5.7,0-10.3-4.6-10.3-10.3c-0.1-5.7,4.6-10.3,10.3-10.3c5.7,0,10.3,4.6,10.3,10.3C66.2,61.8,61.6,66.4,55.9,66.4z"></path><path fill="#FFFFFF" d="M74.3,33.5c-2.3,0-4.2,1.9-4.2,4.2s1.9,4.2,4.2,4.2s4.2-1.9,4.2-4.2S76.6,33.5,74.3,33.5z"></path><path fill="#FFFFFF" d="M73.1,21.3H38.6c-9.7,0-17.5,7.9-17.5,17.5v34.5c0,9.7,7.9,17.6,17.5,17.6h34.5c9.7,0,17.5-7.9,17.5-17.5V38.8
-C90.6,29.1,82.7,21.3,73.1,21.3z M83,73.3c0,5.5-4.5,9.9-9.9,9.9H38.6c-5.5,0-9.9-4.5-9.9-9.9V38.8c0-5.5,4.5-9.9,9.9-9.9h34.5
-c5.5,0,9.9,4.5,9.9,9.9V73.3z"></path></svg></span>
+            
+            <div class="text-center mt-12">
+                <a href="https://www.instagram.com/bbc_bourbon/" target="_blank" class="inline-flex items-center space-x-3 bg-bourbon hover:bg-aged-oak text-dark-leather font-bold py-4 px-8 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-xl">
+                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                    </svg>
+                    <span>Connect on Instagram</span>
           </a>
         </div>
       </div>
     </section>
     
-
-    
-    
-    
-    <footer class="u-align-center-sm u-align-center-xs u-black u-clearfix u-container-align-center-lg u-container-align-center-md u-container-align-center-sm u-container-align-center-xl u-footer" id="Footer"><div class="u-clearfix u-sheet u-valign-middle-lg u-valign-middle-md u-valign-middle-sm u-sheet-1">
-        <a href="#" class="u-image u-logo u-image-1" data-image-width="340" data-image-height="338">
-          <img src="images/logo.png?rand=9b6d" class="u-logo-image u-logo-image-1">
-        </a>
-        <div class="u-social-icons u-social-icons-1">
-          <a class="u-social-url" title="instagram" target="_blank" href="https://www.instagram.com/bbc_bourbon/"><span class="u-icon u-social-icon u-social-instagram u-icon-1"><svg class="u-svg-link" preserveAspectRatio="xMidYMin slice" viewBox="0 0 112 112" style=""><use xlink:href="#svg-d679"></use></svg><svg class="u-svg-content" viewBox="0 0 112 112" x="0" y="0" id="svg-d679"><circle fill="currentColor" cx="56.1" cy="56.1" r="55"></circle><path fill="#FFFFFF" d="M55.9,38.2c-9.9,0-17.9,8-17.9,17.9C38,66,46,74,55.9,74c9.9,0,17.9-8,17.9-17.9C73.8,46.2,65.8,38.2,55.9,38.2
-z M55.9,66.4c-5.7,0-10.3-4.6-10.3-10.3c-0.1-5.7,4.6-10.3,10.3-10.3c5.7,0,10.3,4.6,10.3,10.3C66.2,61.8,61.6,66.4,55.9,66.4z"></path><path fill="#FFFFFF" d="M74.3,33.5c-2.3,0-4.2,1.9-4.2,4.2s1.9,4.2,4.2,4.2s4.2-1.9,4.2-4.2S76.6,33.5,74.3,33.5z"></path><path fill="#FFFFFF" d="M73.1,21.3H38.6c-9.7,0-17.5,7.9-17.5,17.5v34.5c0,9.7,7.9,17.6,17.5,17.6h34.5c9.7,0,17.5-7.9,17.5-17.5V38.8
-C90.6,29.1,82.7,21.3,73.1,21.3z M83,73.3c0,5.5-4.5,9.9-9.9,9.9H38.6c-5.5,0-9.9-4.5-9.9-9.9V38.8c0-5.5,4.5-9.9,9.9-9.9h34.5
-c5.5,0,9.9,4.5,9.9,9.9V73.3z"></path></svg></span>
-          </a>
+    <!-- Footer -->
+    <footer class="bg-dark-leather py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="flex items-center space-x-4 mb-6 md:mb-0">
+                    <img src="images/logo.png" alt="BBC Logo" class="h-12 w-12 rounded-full border-2 border-bourbon">
+                    <span class="text-bourbon text-xl font-serif font-bold">Boys Bourbon Club</span>
+                </div>
+                <div class="flex space-x-6">
+                    <a href="https://www.instagram.com/bbc_bourbon/" target="_blank" class="text-bourbon hover:text-cream transition-colors">
+                        <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+            <div class="mt-8 text-center text-cream/60 text-sm">
+                <p>&copy; 2026 Boys Bourbon Club. Tampa Bay Area.</p>
+            </div>
         </div>
-      </div></footer>
-</body></html>
+    </footer>
+
+    <!-- Mobile Menu Script -->
+    <script>
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+        
+        // Close mobile menu when clicking on a link
+        const mobileLinks = mobileMenu.querySelectorAll('a');
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+        
+        // Smooth scroll behavior
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+        
+        // Bourbon Glass Scroll Indicator
+        const bourbonLiquid = document.getElementById('bourbonLiquid');
+        
+        function updateBourbonLevel() {
+            // Get scroll position
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            const docHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            
+            // Calculate scroll percentage (starts at 75%, empties to 0%)
+            const scrollPercent = scrollTop / docHeight;
+            const bourbonLevel = Math.max(0, Math.min(75, (1 - scrollPercent) * 75));
+            
+            // Update bourbon liquid height
+            bourbonLiquid.style.height = bourbonLevel + '%';
+        }
+        
+        // Initialize bourbon level
+        updateBourbonLevel();
+        
+        // Update on scroll
+        window.addEventListener('scroll', updateBourbonLevel);
+        
+        // Update on resize
+        window.addEventListener('resize', updateBourbonLevel);
+    </script>
+</body>
+</html>
